@@ -1,0 +1,143 @@
+p {
+    margin: 0;
+}
+
+.ContentBox {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    background-color: #F1F1E6;
+    border: solid gold;
+    border-width: 2px;
+    border-radius: 10px;
+    margin: 40px 5px;
+    padding: 5vh 5vw;
+    /* box-shadow: rgb(168, 170, 170) 2px 2px 1px; */
+}
+
+.MainContent {
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    justify-content: space-between;
+    /* align-items: center; */
+}
+
+.ContentSection {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+    margin: 25px 0 15px;
+}
+
+.ContentHeading {
+    font-weight: 700;
+    font-size: 5vmin;
+    padding-bottom: 40px;
+}
+
+.Content {
+    font-size: 3vmin;
+    align-content: center;
+}
+
+.Upload-Form {
+    padding: 20px;
+    min-height: 65vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.Form-Title {
+    font-size: x-large;
+}
+
+.Upload-Form > form {
+    min-height: 35vh;
+    width: 40vw;
+    border-width: 5px;
+    border-color: black;
+    border-radius: 10px;
+    background-color: rgb(238, 238, 238);
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Input-Fields {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 60px;
+    margin-bottom: 5px;
+}
+
+.Input-Field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.Input-Field > input {
+    margin-top: 5px;
+    height: 2rem;
+    width: 100%;
+}
+
+.Submit {
+    margin-left: auto;
+}
+
+.Submit-Btn {
+    display: table-cell;
+    background-color: #012c78;
+    color: white;
+    border-radius: 5px;
+    padding: 15px 20px;
+}
+
+.Sign-Up {
+    display: flex;
+    flex-direction: row;
+}
+
+.Sign-Up > a {
+    color: #012c78;
+    margin: 0 5px;
+    font-weight: 500;
+}
+
+.Sign-Up > a:hover {
+    font-weight: 700;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 720px) {
+    .MainContent {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+#predictBtn {
+    /* box-sizing: border-box; */
+    color: #0096FB;
+    font-size: medium;
+    font-weight: 600;
+    background-color: white;
+    border: solid #0096FB 2px;
+    border-radius: 3px;
+}
+
+#predictBtn:hover {
+    color: white;
+    background-color: #0096FB;
+    border-color: white;
+    box-shadow: #0096FB 2px 2px 2px;
+}

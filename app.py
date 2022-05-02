@@ -15,7 +15,7 @@ from sklearn.decomposition import PCA
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 from sklearn.neighbors import KNeighborsClassifier
 
-from keras.models import Sequential
+from keras.models import Sequential, load_model
 from keras.layers import Dense, Conv2D, Flatten, AveragePooling2D
 import tensorflow as tf
 from tensorflow import keras
@@ -31,15 +31,17 @@ logging.basicConfig(level=logging.INFO)
 
 logger = logging.getLogger('HELLO WORLD')
 
-app = Flask(__name__, static_url_path='', static_folder='fruits360/build')
+app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 
-UPLOAD_FOLDER = 'E:/IIT Jodhpur/Semester 4/Classes/PRML/Main Project/Website/uploads'
+UPLOAD_FOLDER = './uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 CORS(app) #comment this on deployment
 api = Api(app)
 
-model = pickle.load(open('model.pkl', 'rb'))
+# model = pickle.load(open('model.pkl', 'rb'))
+cnnClasses = pickle.load(open('classes.pkl', 'rb'))
+cnnModel = load_model('model_cnn.h5')
 
 @app.route("/", defaults={'path':''})
 def serve(path):
@@ -57,7 +59,8 @@ def fileUpload():
     file = request.files['file']
     filename = secure_filename(file.filename)
     
-    destination="/".join([target, filename])
+    # destination="/".join([target, filename])
+    destination = str(target) + "/imgToPredict." + filename.split(".")[-1]
     file.save(destination)
     
     logger.info(" Image saved at "+ str(destination))
@@ -66,13 +69,11 @@ def fileUpload():
     image = mpimg.imread(destination)
     image = cv2.resize(image, (20, 20), interpolation=cv2.INTER_AREA)
     image = image.flatten().astype(np.uint8).reshape(1, 1200)
-    prediction = model.predict(image)[0]
+    # prediction = model.predict(image)[0]
 
-    # cnnModel, cnnClasses = pickle.load(open('model_cnn.pkl', 'rb'))
-    # cnnModel = keras.model.load_model('model_cnn2.h5')
-    # prediction = cnnClasses[cnnModel.predict(np.array([image.reshape((20, 20, 3))])).argmax()]
+    prediction = cnnClasses[cnnModel.predict(np.array([image.reshape((20, 20, 3))])).argmax()]
 
-    logger.info(" Prediction: " + str(prediction[0]))
+    logger.info(" Prediction: " + str(prediction))
 
     ret_msg = prediction
     # session['uploadFilePath']=destination
